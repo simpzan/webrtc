@@ -593,13 +593,62 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
   rtc_library("socketrocket") {
     testonly = true
     sources = [
-      "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.h",
-      "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m",
+      "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/NSRunLoop+SRWebSocket.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/SRSecurityPolicy.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/SocketRocket.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/SRConstants.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Proxy/SRProxyConnect.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Proxy/SRProxyConnect.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/RunLoop/SRRunLoopThread.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/RunLoop/SRRunLoopThread.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Security/SRPinningSecurityPolicy.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Security/SRPinningSecurityPolicy.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/NSRunLoop+SRWebSocketPrivate.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Delegate/SRDelegateController.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Delegate/SRDelegateController.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/NSURLRequest+SRWebSocketPrivate.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRHash.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRLog.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRMutex.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRHTTPConnectMessage.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRSIMDHelpers.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRRandom.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRURLUtilities.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRError.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRLog.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRHash.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRMutex.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRHTTPConnectMessage.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRError.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRRandom.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRURLUtilities.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/SRSIMDHelpers.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/IOConsumer/SRIOConsumerPool.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/IOConsumer/SRIOConsumer.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/IOConsumer/SRIOConsumer.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/IOConsumer/SRIOConsumerPool.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/SRConstants.m", 
+      "objc/AppRTCMobile/third_party/SocketRocket/NSURLRequest+SRWebSocket.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/SRWebSocket.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/NSRunLoop+SRWebSocket.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/SRSecurityPolicy.h", 
+      "objc/AppRTCMobile/third_party/SocketRocket/NSURLRequest+SRWebSocket.m", 
     ]
     configs += [ ":socketrocket_warning_config" ]
     public_configs = [ ":socketrocket_include_config" ]
-
+    include_dirs = [
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Utilities/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/IOConsumer/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Security/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Proxy/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/Delegate/",
+      "objc/AppRTCMobile/third_party/SocketRocket/Internal/RunLoop/",
+      "objc/AppRTCMobile/third_party/",
+    ]
     libs = [ "icucore" ]
+    cflags = [ "-std=gnu99" ]
     frameworks = [
       "CFNetwork.framework",
       "Security.framework",
