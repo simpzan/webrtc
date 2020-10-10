@@ -101,6 +101,7 @@ struct RangeCheckImpl {};
 // Dst range always contains the result: nothing to check.
 template <typename Dst, typename Src, DstSign IsDstSigned, SrcSign IsSrcSigned>
 struct RangeCheckImpl<Dst, Src, IsDstSigned, IsSrcSigned, CONTAINS_RANGE> {
+  __attribute__((no_instrument_function))
   static constexpr RangeCheckResult Check(Src value) { return TYPE_VALID; }
 };
 
@@ -163,6 +164,7 @@ struct RangeCheckImpl<Dst, Src, DST_UNSIGNED, SRC_SIGNED, OVERLAPS_RANGE> {
 };
 
 template <typename Dst, typename Src>
+__attribute__((no_instrument_function))
 inline constexpr RangeCheckResult RangeCheck(Src value) {
   static_assert(std::numeric_limits<Src>::is_specialized,
                 "argument must be numeric");

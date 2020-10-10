@@ -52,6 +52,7 @@ void DenoiseAutoCorrelation(
 
 // Computes the initial inverse filter coefficients given the auto-correlation
 // coefficients of an input frame.
+__attribute__((no_instrument_function))
 void ComputeInitialInverseFilterCoefficients(
     rtc::ArrayView<const float, kNumLpcCoefficients> auto_corr,
     rtc::ArrayView<float, kNumLpcCoefficients - 1> lpc_coeffs) {

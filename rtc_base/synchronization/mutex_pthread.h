@@ -38,10 +38,12 @@ class RTC_LOCKABLE MutexImpl final {
   MutexImpl& operator=(const MutexImpl&) = delete;
   ~MutexImpl() { pthread_mutex_destroy(&mutex_); }
 
+  __attribute__((no_instrument_function))
   void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION() { pthread_mutex_lock(&mutex_); }
   RTC_WARN_UNUSED_RESULT bool TryLock() RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
     return pthread_mutex_trylock(&mutex_) == 0;
   }
+  __attribute__((no_instrument_function))
   void Unlock() RTC_UNLOCK_FUNCTION() { pthread_mutex_unlock(&mutex_); }
 
  private:

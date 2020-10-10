@@ -245,6 +245,8 @@ rtc_library("fir_filter_factory") {
 
 if (current_cpu == "x86" || current_cpu == "x64") {
   rtc_library("common_audio_sse2") {
+    no_trace = true
+
     sources = [
       "fir_filter_sse.cc",
       "fir_filter_sse.h",

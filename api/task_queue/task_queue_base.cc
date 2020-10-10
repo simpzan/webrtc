@@ -22,7 +22,7 @@ ABSL_CONST_INIT thread_local TaskQueueBase* current = nullptr;
 
 }  // namespace
 
-TaskQueueBase* TaskQueueBase::Current() {
+__attribute__((no_instrument_function)) TaskQueueBase* TaskQueueBase::Current() {
   return current;
 }
 

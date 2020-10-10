@@ -71,6 +71,7 @@ struct DataChannelInit {
 // this structure's |binary| flag tells whether the data should be interpreted
 // as binary or text.
 struct DataBuffer {
+  __attribute__((no_instrument_function))
   DataBuffer(const rtc::CopyOnWriteBuffer& data, bool binary)
       : data(data), binary(binary) {}
   // For convenience for unit tests.

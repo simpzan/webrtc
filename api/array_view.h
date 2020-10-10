@@ -97,9 +97,9 @@ class ArrayViewBase {
  public:
   ArrayViewBase(T* data, size_t size) : data_(data) {}
 
-  static constexpr size_t size() { return Size; }
+  __attribute__((no_instrument_function)) static constexpr size_t size() { return Size; }
   static constexpr bool empty() { return false; }
-  T* data() const { return data_; }
+  __attribute__((no_instrument_function)) T* data() const { return data_; }
 
  protected:
   static constexpr bool fixed_size() { return true; }
@@ -129,8 +129,13 @@ class ArrayViewBase<T, impl::kArrayViewVarSize> {
   ArrayViewBase(T* data, size_t size)
       : data_(size == 0 ? nullptr : data), size_(size) {}
 
+  __attribute__((no_instrument_function))
   size_t size() const { return size_; }
+  
+  __attribute__((no_instrument_function))
   bool empty() const { return size_ == 0; }
+  
+  __attribute__((no_instrument_function)) 
   T* data() const { return data_; }
 
  protected:
@@ -249,6 +254,7 @@ class ArrayView final : public impl::ArrayViewBase<T, Size> {
   // Indexing and iteration. These allow mutation even if the ArrayView is
   // const, because the ArrayView doesn't own the array. (To prevent mutation,
   // use a const element type.)
+  __attribute__((no_instrument_function)) 
   T& operator[](size_t idx) const {
     RTC_DCHECK_LT(idx, this->size());
     RTC_DCHECK(this->data());

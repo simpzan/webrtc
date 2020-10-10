@@ -9,6 +9,7 @@
 import("../../webrtc.gni")
 
 rtc_library("audio_frame_api") {
+  no_trace = true
   visibility = [ "*" ]
   sources = [
     "audio_frame.cc",

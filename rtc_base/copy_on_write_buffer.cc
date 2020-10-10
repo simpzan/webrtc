@@ -112,6 +112,7 @@ void CopyOnWriteBuffer::Clear() {
   RTC_DCHECK(IsConsistent());
 }
 
+__attribute__((no_instrument_function))
 void CopyOnWriteBuffer::UnshareAndEnsureCapacity(size_t new_capacity) {
   if (buffer_->HasOneRef() && new_capacity <= capacity()) {
     return;

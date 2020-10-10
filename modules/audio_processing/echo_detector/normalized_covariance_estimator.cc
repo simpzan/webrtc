@@ -22,6 +22,7 @@ constexpr float kAlpha = 0.001f;
 
 }  // namespace
 
+__attribute__((no_instrument_function))
 void NormalizedCovarianceEstimator::Update(float x,
                                            float x_mean,
                                            float x_sigma,
@@ -35,6 +36,7 @@ void NormalizedCovarianceEstimator::Update(float x,
   RTC_DCHECK(isfinite(normalized_cross_correlation_));
 }
 
+__attribute__((no_instrument_function))
 void NormalizedCovarianceEstimator::Clear() {
   covariance_ = 0.f;
   normalized_cross_correlation_ = 0.f;

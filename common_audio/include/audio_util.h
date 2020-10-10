@@ -37,12 +37,14 @@ static inline float S16ToFloat(int16_t v) {
   return v * kScaling;
 }
 
+__attribute__((no_instrument_function))
 static inline int16_t FloatS16ToS16(float v) {
   v = std::min(v, 32767.f);
   v = std::max(v, -32768.f);
   return static_cast<int16_t>(v + std::copysign(0.5f, v));
 }
 
+__attribute__((no_instrument_function))
 static inline int16_t FloatToS16(float v) {
   v *= 32768.f;
   v = std::min(v, 32767.f);

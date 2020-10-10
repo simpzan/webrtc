@@ -14,6 +14,7 @@
 
 namespace webrtc {
 
+__attribute__((no_instrument_function))
 BlockDelayBuffer::BlockDelayBuffer(size_t num_channels,
                                    size_t num_bands,
                                    size_t frame_length,
@@ -23,9 +24,10 @@ BlockDelayBuffer::BlockDelayBuffer(size_t num_channels,
       buf_(num_channels,
            std::vector<std::vector<float>>(num_bands,
                                            std::vector<float>(delay_, 0.f))) {}
-
+__attribute__((no_instrument_function))
 BlockDelayBuffer::~BlockDelayBuffer() = default;
 
+__attribute__((no_instrument_function))
 void BlockDelayBuffer::DelaySignal(AudioBuffer* frame) {
   RTC_DCHECK_EQ(buf_.size(), frame->num_channels());
   if (delay_ == 0) {

@@ -191,6 +191,7 @@ class PhysicalSocket : public AsyncSocket, public sigslot::has_slots<> {
   void UpdateLastError();
   void MaybeRemapSendError();
 
+  __attribute__((no_instrument_function))
   uint8_t enabled_events() const { return enabled_events_; }
   virtual void SetEnabledEvents(uint8_t events);
   virtual void EnableEvents(uint8_t events);

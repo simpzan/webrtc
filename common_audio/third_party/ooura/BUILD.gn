@@ -9,6 +9,7 @@
 import("../../../webrtc.gni")
 
 rtc_library("fft_size_128") {
+  no_trace = true
   sources = [
     "fft_size_128/ooura_fft.cc",
     "fft_size_128/ooura_fft.h",

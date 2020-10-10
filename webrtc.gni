@@ -321,6 +321,7 @@ if (!build_with_chromium && is_clang) {
 rtc_add_configs = rtc_common_configs
 rtc_prod_configs = [ webrtc_root + ":rtc_prod_config" ]
 rtc_library_impl_config = [ webrtc_root + ":library_impl_config" ]
+rtc_tracy_config = [ "//:tracy_config" ]
 
 set_defaults("rtc_test") {
   configs = rtc_add_configs
@@ -520,7 +521,9 @@ template("rtc_source_set") {
     if (!defined(testonly) || !testonly) {
       configs += rtc_prod_configs
     }
-
+    if (!defined(no_trace) || !no_trace) {
+      configs += rtc_tracy_config
+    }
     configs += invoker.configs
     configs += rtc_library_impl_config
     configs -= rtc_remove_configs
@@ -736,6 +739,9 @@ template("rtc_library") {
       configs += rtc_prod_configs
     }
 
+    if (!defined(no_trace) || !no_trace) {
+      configs += rtc_tracy_config
+    }
     configs += invoker.configs
     configs += rtc_library_impl_config
     configs -= rtc_remove_configs

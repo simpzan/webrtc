@@ -41,7 +41,9 @@ class UnitBase {
   static constexpr Unit_T MinusInfinity() { return Unit_T(MinusInfinityVal()); }
 
   constexpr bool IsZero() const { return value_ == 0; }
+  __attribute__((no_instrument_function))
   constexpr bool IsFinite() const { return !IsInfinite(); }
+  __attribute__((no_instrument_function))
   constexpr bool IsInfinite() const {
     return value_ == PlusInfinityVal() || value_ == MinusInfinityVal();
   }
@@ -188,15 +190,18 @@ class UnitBase {
     return ToValue<T>() * Factor;
   }
 
+  __attribute__((no_instrument_function))
   explicit constexpr UnitBase(int64_t value) : value_(value) {}
 
  private:
   template <class RelativeUnit_T>
   friend class RelativeUnit;
-
+  
+  __attribute__((no_instrument_function))
   static inline constexpr int64_t PlusInfinityVal() {
     return std::numeric_limits<int64_t>::max();
   }
+  __attribute__((no_instrument_function))
   static inline constexpr int64_t MinusInfinityVal() {
     return std::numeric_limits<int64_t>::min();
   }

@@ -25,7 +25,7 @@ TaskQueue::~TaskQueue() {
   impl_->Delete();
 }
 
-bool TaskQueue::IsCurrent() const {
+__attribute__((no_instrument_function)) bool TaskQueue::IsCurrent() const {
   return impl_->IsCurrent();
 }
 

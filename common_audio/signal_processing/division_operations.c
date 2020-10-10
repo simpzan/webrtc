@@ -24,6 +24,7 @@
 #include "common_audio/signal_processing/include/signal_processing_library.h"
 #include "rtc_base/sanitizer.h"
 
+__attribute__((no_instrument_function))
 uint32_t WebRtcSpl_DivU32U16(uint32_t num, uint16_t den)
 {
     // Guard against division with 0
@@ -36,6 +37,7 @@ uint32_t WebRtcSpl_DivU32U16(uint32_t num, uint16_t den)
     }
 }
 
+__attribute__((no_instrument_function))
 int32_t WebRtcSpl_DivW32W16(int32_t num, int16_t den)
 {
     // Guard against division with 0
@@ -48,6 +50,7 @@ int32_t WebRtcSpl_DivW32W16(int32_t num, int16_t den)
     }
 }
 
+__attribute__((no_instrument_function))
 int16_t WebRtcSpl_DivW32W16ResW16(int32_t num, int16_t den)
 {
     // Guard against division with 0
@@ -60,6 +63,7 @@ int16_t WebRtcSpl_DivW32W16ResW16(int32_t num, int16_t den)
     }
 }
 
+__attribute__((no_instrument_function))
 int32_t WebRtcSpl_DivResultInQ31(int32_t num, int32_t den)
 {
     int32_t L_num = num;
@@ -98,6 +102,7 @@ int32_t WebRtcSpl_DivResultInQ31(int32_t num, int32_t den)
     return div;
 }
 
+__attribute__((no_instrument_function))
 int32_t RTC_NO_SANITIZE("signed-integer-overflow")  // bugs.webrtc.org/5486
 WebRtcSpl_DivW32HiLow(int32_t num, int16_t den_hi, int16_t den_low)
 {

@@ -71,6 +71,7 @@ rtc_library("audio_frame_proxies") {
 }
 
 rtc_library("audio_buffer") {
+  no_trace = true
   visibility = [ "*" ]
 
   configs += [ ":apm_debug_dump" ]

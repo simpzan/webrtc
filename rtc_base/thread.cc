@@ -110,7 +110,7 @@ class RTC_SCOPED_LOCKABLE MarkProcessingCritScope {
 
 }  // namespace
 
-ThreadManager* ThreadManager::Instance() {
+__attribute__((no_instrument_function)) ThreadManager* ThreadManager::Instance() {
   static ThreadManager* const thread_manager = new ThreadManager();
   return thread_manager;
 }
@@ -273,7 +273,7 @@ ThreadManager::ThreadManager() : main_thread_ref_(CurrentThreadRef()) {
   pthread_key_create(&key_, nullptr);
 }
 
-Thread* ThreadManager::CurrentThread() {
+__attribute__((no_instrument_function)) Thread* ThreadManager::CurrentThread() {
   return static_cast<Thread*>(pthread_getspecific(key_));
 }
 
@@ -691,7 +691,7 @@ void Thread::Dispatch(Message* pmsg) {
   }
 }
 
-bool Thread::IsCurrent() const {
+__attribute__((no_instrument_function)) bool Thread::IsCurrent() const {
   return ThreadManager::Instance()->CurrentThread() == this;
 }
 

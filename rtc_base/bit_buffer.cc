@@ -79,6 +79,7 @@ BitBuffer::BitBuffer(const uint8_t* bytes, size_t byte_count)
              std::numeric_limits<uint32_t>::max());
 }
 
+__attribute__((no_instrument_function))
 uint64_t BitBuffer::RemainingBitCount() const {
   return (static_cast<uint64_t>(byte_count_) - byte_offset_) * 8 - bit_offset_;
 }

@@ -97,13 +97,17 @@ class scoped_refptr {
   template <typename U>
   scoped_refptr(scoped_refptr<U>&& r) noexcept : ptr_(r.release()) {}
 
+  __attribute__((no_instrument_function))
   ~scoped_refptr() {
     if (ptr_)
       ptr_->Release();
   }
 
+  __attribute__((no_instrument_function))
   T* get() const { return ptr_; }
+  __attribute__((no_instrument_function))
   operator T*() const { return ptr_; }
+  __attribute__((no_instrument_function))
   T* operator->() const { return ptr_; }
 
   // Returns the (possibly null) raw pointer, and makes the scoped_refptr hold a

@@ -1533,6 +1533,7 @@ if (is_ios || is_mac) {
         ]
 
         configs = [ "..:common_objc" ]
+        configs += [ "//:tracy_config_ld" ]
 
         public_configs = [ ":common_config_objc" ]
       }

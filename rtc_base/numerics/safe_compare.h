@@ -69,6 +69,7 @@ struct LargerInt
                         : 0> {};
 
 template <typename T>
+__attribute__((no_instrument_function))
 constexpr typename std::make_unsigned<T>::type MakeUnsigned(T a) {
   return static_cast<typename std::make_unsigned<T>::type>(a);
 }
@@ -79,6 +80,7 @@ template <typename Op,
           typename T2,
           typename std::enable_if<std::is_signed<T1>::value ==
                                   std::is_signed<T2>::value>::type* = nullptr>
+__attribute__((no_instrument_function)) 
 constexpr bool Cmp(T1 a, T2 b) {
   return Op::Op(a, b);
 }
@@ -115,6 +117,7 @@ template <typename Op,
           typename std::enable_if<std::is_signed<T1>::value &&
                                   std::is_unsigned<T2>::value &&
                                   !LargerInt<T2, T1>::value>::type* = nullptr>
+__attribute__((no_instrument_function))
 constexpr bool Cmp(T1 a, T2 b) {
   return a < 0 ? Op::Op(-1, 0) : Op::Op(safe_cmp_impl::MakeUnsigned(a), b);
 }
@@ -127,6 +130,7 @@ template <typename Op,
           typename std::enable_if<std::is_unsigned<T1>::value &&
                                   std::is_signed<T2>::value &&
                                   !LargerInt<T1, T2>::value>::type* = nullptr>
+__attribute__((no_instrument_function))
 constexpr bool Cmp(T1 a, T2 b) {
   return b < 0 ? Op::Op(0, -1) : Op::Op(a, safe_cmp_impl::MakeUnsigned(b));
 }
@@ -134,6 +138,7 @@ constexpr bool Cmp(T1 a, T2 b) {
 #define RTC_SAFECMP_MAKE_OP(name, op)      \
   struct name {                            \
     template <typename T1, typename T2>    \
+    __attribute__((no_instrument_function))\
     static constexpr bool Op(T1 a, T2 b) { \
       return a op b;                       \
     }                                      \
@@ -150,14 +155,14 @@ RTC_SAFECMP_MAKE_OP(GeOp, >=)
 
 #define RTC_SAFECMP_MAKE_FUN(name)                                            \
   template <typename T1, typename T2>                                         \
-  constexpr                                                                   \
+  constexpr __attribute__((no_instrument_function))                           \
       typename std::enable_if<IsIntlike<T1>::value && IsIntlike<T2>::value,   \
                               bool>::type Safe##name(T1 a, T2 b) {            \
     /* Unary plus here turns enums into real integral types. */               \
     return safe_cmp_impl::Cmp<safe_cmp_impl::name##Op>(+a, +b);               \
   }                                                                           \
   template <typename T1, typename T2>                                         \
-  constexpr                                                                   \
+  constexpr __attribute__((no_instrument_function))                           \
       typename std::enable_if<!IsIntlike<T1>::value || !IsIntlike<T2>::value, \
                               bool>::type Safe##name(const T1& a,             \
                                                      const T2& b) {           \

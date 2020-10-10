@@ -39,6 +39,7 @@ class RTC_LOCKABLE Mutex final {
   Mutex(const Mutex&) = delete;
   Mutex& operator=(const Mutex&) = delete;
 
+  __attribute__((no_instrument_function))
   void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION() {
     rtc::PlatformThreadRef current = CurrentThreadRefAssertingNotBeingHolder();
     impl_.Lock();
@@ -54,6 +55,7 @@ class RTC_LOCKABLE Mutex final {
     }
     return false;
   }
+  __attribute__((no_instrument_function))
   void Unlock() RTC_UNLOCK_FUNCTION() {
     // |holder_| changes from CurrentThreadRef() to 0. If something else than
     // CurrentThreadRef() is stored in |holder_|, the Unlock results in
@@ -64,6 +66,7 @@ class RTC_LOCKABLE Mutex final {
   }
 
  private:
+  __attribute__((no_instrument_function))
   rtc::PlatformThreadRef CurrentThreadRefAssertingNotBeingHolder() {
     rtc::PlatformThreadRef holder = holder_.load(std::memory_order_relaxed);
     rtc::PlatformThreadRef current = rtc::CurrentThreadRef();
@@ -96,10 +99,12 @@ class RTC_SCOPED_LOCKABLE MutexLock final {
   MutexLock(const MutexLock&) = delete;
   MutexLock& operator=(const MutexLock&) = delete;
 
+  __attribute__((no_instrument_function))
   explicit MutexLock(Mutex* mutex) RTC_EXCLUSIVE_LOCK_FUNCTION(mutex)
       : mutex_(mutex) {
     mutex->Lock();
   }
+  __attribute__((no_instrument_function))
   ~MutexLock() RTC_UNLOCK_FUNCTION() { mutex_->Unlock(); }
 
  private:

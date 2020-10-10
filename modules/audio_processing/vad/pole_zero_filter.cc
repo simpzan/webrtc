@@ -53,6 +53,7 @@ PoleZeroFilter::PoleZeroFilter(const float* numerator_coefficients,
 }
 
 template <typename T>
+__attribute__((no_instrument_function))
 static float FilterArPast(const T* past,
                           size_t order,
                           const float* coefficients) {

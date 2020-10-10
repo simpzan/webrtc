@@ -19,7 +19,7 @@ namespace webrtc {
 namespace {
 // On Mac, returns the label of the current dispatch queue; elsewhere, return
 // null.
-const void* GetSystemQueueRef() {
+__attribute__((no_instrument_function)) const void* GetSystemQueueRef() {
 #if defined(WEBRTC_MAC)
   return dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL);
 #else
@@ -44,7 +44,7 @@ SequenceCheckerImpl::SequenceCheckerImpl()
 
 SequenceCheckerImpl::~SequenceCheckerImpl() = default;
 
-bool SequenceCheckerImpl::IsCurrent() const {
+__attribute__((no_instrument_function)) bool SequenceCheckerImpl::IsCurrent() const {
   const TaskQueueBase* const current_queue = TaskQueueBase::Current();
   const rtc::PlatformThreadRef current_thread = rtc::CurrentThreadRef();
   const void* const current_system_queue = GetSystemQueueRef();

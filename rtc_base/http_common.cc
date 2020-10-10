@@ -184,6 +184,7 @@ void HttpParseAttributes(const char* data,
   }
 }
 
+__attribute__((no_instrument_function))
 bool HttpHasAttribute(const HttpAttributeList& attributes,
                       const std::string& name,
                       std::string* value) {

@@ -146,6 +146,7 @@ void RateTracker::EnsureInitialized() {
   }
 }
 
+__attribute__((no_instrument_function))
 size_t RateTracker::NextBucketIndex(size_t bucket_index) const {
   return (bucket_index + 1u) % (bucket_count_ + 1u);
 }

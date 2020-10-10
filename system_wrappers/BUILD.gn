@@ -13,6 +13,7 @@ if (is_android) {
 import("../webrtc.gni")
 
 rtc_library("system_wrappers") {
+  no_trace = true
   visibility = [ "*" ]
   sources = [
     "include/clock.h",

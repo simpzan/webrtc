@@ -23,6 +23,7 @@ class RenderQueueItemVerifier {
   explicit RenderQueueItemVerifier(size_t minimum_capacity)
       : minimum_capacity_(minimum_capacity) {}
 
+  __attribute__((no_instrument_function))
   bool operator()(const std::vector<T>& v) const {
     return v.capacity() >= minimum_capacity_;
   }

@@ -48,6 +48,7 @@ void SetupEventTracer(GetCategoryEnabledPtr get_category_enabled_ptr,
   g_add_trace_event_ptr = add_trace_event_ptr;
 }
 
+__attribute__((no_instrument_function))
 const unsigned char* EventTracer::GetCategoryEnabled(const char* name) {
   if (g_get_category_enabled_ptr)
     return g_get_category_enabled_ptr(name);

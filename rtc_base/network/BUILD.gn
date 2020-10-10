@@ -9,6 +9,7 @@
 import("../../webrtc.gni")
 
 rtc_library("sent_packet") {
+  no_trace = true
   sources = [
     "sent_packet.cc",
     "sent_packet.h",

@@ -703,7 +703,7 @@ int SocketDispatcher::next_id_ = 0;
 
 #elif defined(WEBRTC_POSIX)
 
-int SocketDispatcher::GetDescriptor() {
+__attribute__((no_instrument_function)) int SocketDispatcher::GetDescriptor() {
   return s_;
 }
 
@@ -756,6 +756,7 @@ bool SocketDispatcher::IsDescriptorClosed() {
 
 #endif  // WEBRTC_POSIX
 
+__attribute__((no_instrument_function))
 uint32_t SocketDispatcher::GetRequestedEvents() {
   return enabled_events();
 }

@@ -64,6 +64,7 @@ class AudioBuffer {
 
   size_t num_channels() const { return num_channels_; }
   size_t num_frames() const { return buffer_num_frames_; }
+  __attribute__((no_instrument_function))
   size_t num_frames_per_band() const { return num_split_frames_; }
   size_t num_bands() const { return num_bands_; }
 

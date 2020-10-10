@@ -57,6 +57,7 @@ void RmsLevel::Reset() {
   block_size_ = absl::nullopt;
 }
 
+__attribute__((no_instrument_function))
 void RmsLevel::Analyze(rtc::ArrayView<const int16_t> data) {
   if (data.empty()) {
     return;

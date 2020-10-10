@@ -273,7 +273,7 @@ void AudioVector::CrossFade(const AudioVector& append_this,
 }
 
 // Returns the number of elements in this AudioVector.
-size_t AudioVector::Size() const {
+__attribute__((no_instrument_function)) size_t AudioVector::Size() const {
   return (end_index_ + capacity_ - begin_index_) % capacity_;
 }
 

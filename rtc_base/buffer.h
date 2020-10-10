@@ -400,6 +400,7 @@ class BufferT {
   // Postcondition for all methods except move construction and move
   // assignment, which leave the moved-from object in a possibly inconsistent
   // state.
+  __attribute__((no_instrument_function))
   bool IsConsistent() const {
     return (data_ || capacity_ == 0) && capacity_ >= size_;
   }

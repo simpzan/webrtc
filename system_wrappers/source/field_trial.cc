@@ -37,6 +37,7 @@ constexpr char kPersistentStringSeparator = '/';
 //
 //  E.g. invalid config:
 //    "WebRTC-experiment1/Enabled"  (note missing / separator at the end).
+__attribute__((no_instrument_function))
 bool FieldTrialsStringIsValidInternal(const absl::string_view trials) {
   if (trials.empty())
     return true;
@@ -70,10 +71,12 @@ bool FieldTrialsStringIsValidInternal(const absl::string_view trials) {
 }
 }  // namespace
 
+__attribute__((no_instrument_function))
 bool FieldTrialsStringIsValid(const char* trials_string) {
   return FieldTrialsStringIsValidInternal(trials_string);
 }
 
+__attribute__((no_instrument_function))
 void InsertOrReplaceFieldTrialStringsInMap(
     std::map<std::string, std::string>* fieldtrial_map,
     const absl::string_view trials_string) {
@@ -89,6 +92,7 @@ void InsertOrReplaceFieldTrialStringsInMap(
   }
 }
 
+__attribute__((no_instrument_function))
 std::string MergeFieldTrialsStrings(const char* first, const char* second) {
   std::map<std::string, std::string> fieldtrial_map;
   InsertOrReplaceFieldTrialStringsInMap(&fieldtrial_map, first);
@@ -102,6 +106,7 @@ std::string MergeFieldTrialsStrings(const char* first, const char* second) {
   return merged;
 }
 
+__attribute__((no_instrument_function))
 std::string FindFullName(const std::string& name) {
   if (trials_init_string == NULL)
     return std::string();
@@ -136,6 +141,7 @@ std::string FindFullName(const std::string& name) {
 #endif  // WEBRTC_EXCLUDE_FIELD_TRIAL_DEFAULT
 
 // Optionally initialize field trial from a string.
+__attribute__((no_instrument_function))
 void InitFieldTrialsFromString(const char* trials_string) {
   RTC_LOG(LS_INFO) << "Setting field trial string:" << trials_string;
 #ifndef WEBRTC_EXCLUDE_FIELD_TRIAL_DEFAULT
@@ -147,6 +153,7 @@ void InitFieldTrialsFromString(const char* trials_string) {
   trials_init_string = trials_string;
 }
 
+__attribute__((no_instrument_function))
 const char* GetFieldTrialString() {
   return trials_init_string;
 }

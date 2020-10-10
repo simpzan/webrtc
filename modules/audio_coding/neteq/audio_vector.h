@@ -113,10 +113,12 @@ class AudioVector {
   virtual bool Empty() const;
 
   // Accesses and modifies an element of AudioVector.
+  __attribute__((no_instrument_function))
   inline const int16_t& operator[](size_t index) const {
     return array_[WrapIndex(index, begin_index_, capacity_)];
   }
 
+  __attribute__((no_instrument_function))
   inline int16_t& operator[](size_t index) {
     return array_[WrapIndex(index, begin_index_, capacity_)];
   }
@@ -126,6 +128,7 @@ class AudioVector {
 
   // This method is used by the [] operators to calculate an index within the
   // capacity of the array, but without using the modulo operation (%).
+  __attribute__((no_instrument_function))
   static inline size_t WrapIndex(size_t index,
                                  size_t begin_index,
                                  size_t capacity) {

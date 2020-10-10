@@ -712,6 +712,16 @@ if (rtc_include_tests) {
   }
 }
 
+config("tracy_config") {
+  cflags = [
+    "-finstrument-functions",
+    "-finstrument-functions-after-inlining"
+  ]
+}
+config("tracy_config_ld") {
+  ldflags = [ "-ltracy", "-L/usr/local/lib/" ]
+}
+
 # ---- Poisons ----
 #
 # Here is one empty dummy target for each poison type (needed because

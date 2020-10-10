@@ -339,6 +339,7 @@ void MatchedFilter::Reset() {
   }
 }
 
+__attribute__((no_instrument_function))
 void MatchedFilter::Update(const DownsampledRenderBuffer& render_buffer,
                            rtc::ArrayView<const float> capture) {
   RTC_DCHECK_EQ(sub_block_size_, capture.size());

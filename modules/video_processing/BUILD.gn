@@ -57,6 +57,7 @@ rtc_source_set("denoiser_filter") {
 
 if (build_video_processing_sse2) {
   rtc_library("video_processing_sse2") {
+    no_trace = true
     sources = [
       "util/denoiser_filter_sse2.cc",
       "util/denoiser_filter_sse2.h",

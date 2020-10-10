@@ -15,6 +15,7 @@
 
 namespace webrtc {
 
+__attribute__((no_instrument_function))
 std::string ToString(TimeDelta value) {
   char buf[64];
   rtc::SimpleStringBuilder sb(buf);
