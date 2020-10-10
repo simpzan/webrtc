@@ -27,6 +27,7 @@
 #import <WebRTC/RTCTracing.h>
 #import <WebRTC/RTCVideoSource.h>
 #import <WebRTC/RTCVideoTrack.h>
+#import <WebRTC/RTCPeerConnectionFactoryOptions.h>
 
 #import "ARDAppEngineClient.h"
 #import "ARDExternalSampleCapturer.h"
@@ -232,7 +233,9 @@ static int const kKbpsMultiplier = 1000;
   _factory =
       [[RTC_OBJC_TYPE(RTCPeerConnectionFactory) alloc] initWithEncoderFactory:encoderFactory
                                                                decoderFactory:decoderFactory];
-
+    RTCPeerConnectionFactoryOptions *options = [[RTCPeerConnectionFactoryOptions alloc]init];
+    options.disableEncryption = TRUE;
+    [_factory setOptions:options];
 #if defined(WEBRTC_IOS)
   if (kARDAppClientEnableTracing) {
     NSString *filePath = [self documentsFilePathForFileName:@"webrtc-trace.txt"];
@@ -469,6 +472,7 @@ static int const kKbpsMultiplier = 1000;
       [self.delegate appClient:self didError:sdpError];
       return;
     }
+      NSLog(@"sdp %@", sdp.sdp);
     __weak ARDAppClient *weakSelf = self;
     [self.peerConnection setLocalDescription:sdp
                            completionHandler:^(NSError *error) {
@@ -622,6 +626,7 @@ static int const kKbpsMultiplier = 1000;
       ARDSessionDescriptionMessage *sdpMessage =
           (ARDSessionDescriptionMessage *)message;
       RTC_OBJC_TYPE(RTCSessionDescription) *description = sdpMessage.sessionDescription;
+        NSLog(@"answer sdp %@", description.sdp);
       __weak ARDAppClient *weakSelf = self;
       [_peerConnection setRemoteDescription:description
                           completionHandler:^(NSError *error) {
