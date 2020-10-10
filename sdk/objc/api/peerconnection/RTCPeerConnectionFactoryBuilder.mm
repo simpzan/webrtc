@@ -18,6 +18,13 @@
 #include "modules/audio_device/include/audio_device.h"
 #include "modules/audio_processing/include/audio_processing.h"
 
+#ifdef TARGET_OS_IPHONE
+extern "C" {
+__attribute__((no_instrument_function)) void __cyg_profile_func_enter(void *func, void *caller) {}
+__attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *func, void *caller) {}
+}
+#endif
+
 @implementation RTCPeerConnectionFactoryBuilder {
   std::unique_ptr<webrtc::VideoEncoderFactory> _videoEncoderFactory;
   std::unique_ptr<webrtc::VideoDecoderFactory> _videoDecoderFactory;

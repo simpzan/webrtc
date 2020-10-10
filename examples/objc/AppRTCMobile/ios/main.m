@@ -18,3 +18,10 @@ int main(int argc, char* argv[]) {
         argc, argv, nil, NSStringFromClass([ARDAppDelegate class]));
   }
 }
+
+#ifdef TARGET_OS_IPHONE
+// extern "C" {
+__attribute__((no_instrument_function)) void __cyg_profile_func_enter(void *func, void *caller) {}
+__attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *func, void *caller) {}
+// }
+#endif

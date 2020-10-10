@@ -268,7 +268,8 @@ extern NSString *const SRHTTPResponseErrorKey;
 
  @deprecated Please use `sendString:` or `sendData` instead.
  */
-- (void)send:(nullable id)message __attribute__((deprecated("Please use `sendString:error:` or `sendData:error:` instead.")));
+- (void)send:(nullable id)message;
+//__attribute__((deprecated("Please use `sendString:error:` or `sendData:error:` instead.")));
 
 /**
  Send a UTF-8 String to the server.
