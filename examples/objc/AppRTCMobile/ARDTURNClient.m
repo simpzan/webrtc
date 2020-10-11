@@ -33,18 +33,20 @@ static NSInteger kARDTURNClientErrorBadResponse = -1;
 - (void)requestServersWithCompletionHandler:
     (void (^)(NSArray *turnServers, NSError *error))completionHandler {
 
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_url];
-  [NSURLConnection sendAsyncRequest:request
-                  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-      if (error) {
-        completionHandler(nil, error);
-        return;
-      }
-      NSDictionary *responseDict = [NSDictionary dictionaryWithJSONData:data];
-      NSString *iceServerUrl = responseDict[@"ice_server_url"];
+//  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_url];
+//  [NSURLConnection sendAsyncRequest:request
+//                  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//      if (error) {
+//        completionHandler(nil, error);
+//        return;
+//      }
+//      NSDictionary *responseDict = [NSDictionary dictionaryWithJSONData:data];
+//      NSString *iceServerUrl = responseDict[@"ice_server_url"];
+    NSString *iceServerUrl = @"http://67.216.193.60:4567/turn";
+    // NSString *iceServerUrl = @"https://appr.tc/v1alpha/iceconfig?key=";
       [self makeTurnServerRequestToURL:[NSURL URLWithString:iceServerUrl]
                  WithCompletionHandler:completionHandler];
-    }];
+//    }];
 }
 
 #pragma mark - Private
